@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 class BelferElevator {
 
@@ -10,23 +8,20 @@ class BelferElevator {
     ElevatorState state = ElevatorState.NOT_MOVING;
     private int currentFloor = 1;
     private int current_weight = 0;
+    private Set<Integer> calledUp = new HashSet<>();
+    private Set<Integer> calledDown = new HashSet<>();
     final int total_floors = 18;
     boolean empty = true;
     final int cost_to_open = 7;
     final int cost_to_move_one_floor = 7;
-    DoubleLinkList myList = new DoubleLinkList();
+    private DoubleLinkList myList = new DoubleLinkList();
 
-
-
-
-    // Define the states of the elevator
     enum ElevatorState {
         NOT_MOVING,
         MOVING_UP,
 
         MOVING_DOWN,
         DOORS_OPEN,
-// Define the floor requests queue
 
     }
 
@@ -60,11 +55,6 @@ class BelferElevator {
             floorRequests.poll();
         }
     }
-    //method set empty/full
-//Method is empty
-    //current weight
-    //method set weight
-
 
     public boolean isEmpty() {
         return (current_weight == 0);
@@ -74,8 +64,16 @@ class BelferElevator {
         return currentFloor;
     }
 
-    public void goToUpperFloor(int floor){
+    public void setCalledUpperFloor(int floor){
+        this.calledUp.add(floor);
+    }
 
+    public void setCalledDownFloor(int floor){
+        this.calledUp.add(floor);
+    }
+
+    public boolean isNextFloorPressed(int floor){
+        return calledUp.contains(floor);
     }
 
 
