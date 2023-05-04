@@ -12,9 +12,11 @@ class BelferElevator {
     private Set<Integer> calledDown = new HashSet<>();
     final int total_floors = 18;
     boolean empty = true;
+    // up = 1, still = 0, down = -1
+    int direction = 0;
     final int cost_to_open = 7;
     final int cost_to_move_one_floor = 7;
-    private DoubleLinkList myList = new DoubleLinkList();
+    private DoublyLinkList myList = new DoublyLinkList();
 
     enum ElevatorState {
         NOT_MOVING,
@@ -72,9 +74,113 @@ class BelferElevator {
         this.calledUp.add(floor);
     }
 
-    public boolean isNextFloorPressed(int floor){
+    public boolean isHighFloorPressed(int floor){
         return calledUp.contains(floor);
     }
+    public boolean isLowFloorPressed(int floor){
+        return calledUp.contains(floor);
+    }
+
+    public int goUp(){
+        return 0;
+    }
+
+    public class DoublyLinkList {
+        private ListNode head;
+        private ListNode tail;
+        private int size;
+
+        private class ListNode {
+            int val;
+            ListNode prev;
+            ListNode next;
+
+            public ListNode(int val) {
+                this.val = val;
+                this.prev = null;
+                this.next = null;
+            }
+        }
+
+        public DoublyLinkList() {
+            this.head = null;
+            this.tail = null;
+            this.size = 0;
+        }
+
+        public void addFirst(int val) {
+            ListNode newNode = new ListNode(val);
+            if (isEmpty()) {
+                tail = newNode;
+            } else {
+                head.prev = newNode;
+            }
+            newNode.next = head;
+            head = newNode;
+            size++;
+        }
+
+        public void addLast(int val) {
+            ListNode newNode = new ListNode(val);
+            if (isEmpty()) {
+                head = newNode;
+            } else {
+                tail.next = newNode;
+                newNode.prev = tail;
+            }
+            tail = newNode;
+            size++;
+        }
+
+        public void removeFirst() {
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            if (head == tail) {
+                head = tail = null;
+            } else {
+                head = head.next;
+                head.prev = null;
+            }
+            size--;
+        }
+
+        public void removeLast() {
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            if (head == tail) {
+                head = tail = null;
+            } else {
+                tail = tail.prev;
+                tail.next = null;
+            }
+            size--;
+        }
+
+        public int getFirst() {
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            return head.val;
+        }
+
+        public int getLast() {
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            return tail.val;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        public int size() {
+            return size;
+        }
+    }
+
 
 
 }
