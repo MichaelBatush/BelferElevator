@@ -18,13 +18,13 @@ class BelferElevator {
     final int cost_to_move_one_floor = 7;
     private DoublyLinkList myList = new DoublyLinkList();
 
+    private int status_helper; 
+
     enum ElevatorState {
         NOT_MOVING,
         MOVING_UP,
-
         MOVING_DOWN,
         DOORS_OPEN,
-
     }
 
     public BelferElevator() {
@@ -72,6 +72,16 @@ class BelferElevator {
 
     public void setCalledDownFloor(int floor){
         this.calledUp.add(floor);
+    }
+
+    public void setStatus(int i){
+        if (i > 0){
+            this.state = ElevatorState.MOVING_UP;
+        } else if (i < 0){
+            this.state = ElevatorState.MOVING_DOWN;
+        } else {
+            this.state = ElevatorState.NOT_MOVING;
+        }
     }
 
     public boolean isHighFloorPressed(int floor){
@@ -181,6 +191,16 @@ class BelferElevator {
         }
     }
 
+    public ElevatorState getStatus(){
+        return this.state;
+    }
 
+    public void setStatus_helper(int i){
+        this.status_helper = i;
+    }
+
+    public int getStatus_helper(){
+       return this.status_helper;
+    }
 
 }
