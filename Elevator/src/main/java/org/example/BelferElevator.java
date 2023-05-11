@@ -33,6 +33,20 @@ class BelferElevator {
         }
     }
 
+    public void returnTo1(){
+        if (calledUp.isEmpty() && calledDown.isEmpty()){
+            while (calledUp.isEmpty() && calledDown.isEmpty() && currentFloor > 1){
+                state = ElevatorState.MOVING_DOWN;
+                currentFloor--;
+            }
+        }
+
+        if (calledUp.isEmpty() && calledDown.isEmpty() && currentFloor == 1){
+            state = ElevatorState.NOT_MOVING;
+        }
+
+    }
+
     public void move() {
         if (state == ElevatorState.NOT_MOVING && !floorRequests.isEmpty()) {
             int nextFloor = floorRequests.peek();

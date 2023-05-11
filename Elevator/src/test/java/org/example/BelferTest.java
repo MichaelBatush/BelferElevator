@@ -19,6 +19,15 @@ Belfer Belfer = new Belfer();
 //Belfer.getThree_Elevators()
     @Test
     void getClosestElevator() {
+        Belfer belfer = new Belfer();
+        BelferElevator e1 = belfer.getSpecificElevator(1);
+        BelferElevator e2 = belfer.getSpecificElevator(2);
+        BelferElevator e3 = belfer.getSpecificElevator(3);
+
+        belfer.getClosestElevator(10, true);
+        assertEquals
+        belfer.getClosestElevator(3, true);
+        belfer.getClosestElevator(7, false);
 
     }
 

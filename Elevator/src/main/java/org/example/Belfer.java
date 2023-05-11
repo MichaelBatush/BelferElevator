@@ -30,7 +30,7 @@ public Belfer(){
     return 0;
     }
 
-private BelferElevator getClosestElevator(int i, boolean direction){
+public BelferElevator getClosestElevator(int i, boolean direction){
     //the int is the floor they clicked on and boolean direction
     //true is up, false is down
 
