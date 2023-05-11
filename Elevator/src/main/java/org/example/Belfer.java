@@ -24,6 +24,7 @@ public Belfer(){
     currentWeight1 = 0;
     currentWeight2 = 0;
     currentWeight3 = 0;
+
 }
 
     private int getWeight(BelferElevator e){
@@ -52,24 +53,24 @@ public BelferElevator getClosestElevator(int i, boolean direction){
     4. going UP being BELOW 12
     5. going DOWN being BELOW 11
      */
-
     Integer[] orderValuesGoingUp = {12, 13, 11, 21, 22};
     Integer[] orderValuesGoingDown = {21, 13, 22, 12, 11};
 
     if (direction){
         for (var o : orderValuesGoingUp){
-            if (mapa.get(0).size() == 1){
-                return mapa.get(0).get(0);
-            } else if (mapa.get(0).size() > 1){
-                return chooseOneElevatorAmongMany(mapa.get(0), i);
+            if (mapa.get(o).size() == 1){
+                return mapa.get(o).get(0);
+            } else if (mapa.get(o).size() > 1){
+                BelferElevator b = chooseOneElevatorAmongMany(mapa.get(o), i);
+                b.move();
             }
         }
     } else {
         for (var o : orderValuesGoingDown){
-            if (mapa.get(0).size() == 1){
-                return mapa.get(0).get(0);
-            } else if (mapa.get(0).size() > 1){
-                return chooseOneElevatorAmongMany(mapa.get(0), i);
+            if (mapa.get(o).size() == 1){
+                return mapa.get(o).get(0);
+            } else if (mapa.get(o).size() > 1){
+                return chooseOneElevatorAmongMany(mapa.get(o), i);
             }
         }
     }
@@ -79,6 +80,14 @@ public BelferElevator getClosestElevator(int i, boolean direction){
 private HashMap createStatusForElevators(int i){
     HashMap<Integer, ArrayList<BelferElevator>> mapa = createHashmap();
 
+    Three_Elevators.clear();
+
+    Three_Elevators.add(e1);
+    Three_Elevators.add(e2);
+    Three_Elevators.add(e3);
+
+    System.out.println("1");
+
     for(BelferElevator b : Three_Elevators) {
         if (b.getFloor() > i) {
             b.setStatus_helper(20);
@@ -87,8 +96,10 @@ private HashMap createStatusForElevators(int i){
         }
         if (b.getStatus() == BelferElevator.ElevatorState.MOVING_UP) {
             b.setStatus_helper((b.getStatus_helper() + 2));
-        } else if (e1.getStatus() == BelferElevator.ElevatorState.MOVING_DOWN) {
+        } else if (b.getStatus() == BelferElevator.ElevatorState.MOVING_DOWN) {
             b.setStatus_helper((b.getStatus_helper() + 1));
+        }  else if (b.getStatus() == BelferElevator.ElevatorState.NOT_MOVING) {
+            b.setStatus_helper((b.getStatus_helper() + 3));
         }
         int e = b.getStatus_helper();
 
