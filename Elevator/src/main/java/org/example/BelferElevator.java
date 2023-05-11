@@ -14,8 +14,6 @@ class BelferElevator {
     boolean empty = true;
     // up = 1, still = 0, down = -1
     int direction = 0;
-    final int cost_to_open = 7;
-    final int cost_to_move_one_floor = 7;
     private DoublyLinkList myList = new DoublyLinkList();
 
     private int status_helper; 
@@ -48,7 +46,12 @@ class BelferElevator {
     }
 
     public void move(int floorToGetTo) {
+        if (floorToGetTo > currentFloor){
+            state = ElevatorState.MOVING_UP;
+            while (floorToGetTo != currentFloor){
 
+            }
+        }
     }
 
     public boolean isEmpty() {
