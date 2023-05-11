@@ -31,6 +31,7 @@ public Belfer(){
     }
 
 private BelferElevator getClosestElevator(int i, boolean direction){
+    //the int is the floor they clicked on and boolean direction
     //true is up, false is down
 
     HashMap<Integer, ArrayList<BelferElevator>> mapa = createStatusForElevators(i);
@@ -94,6 +95,7 @@ private HashMap createStatusForElevators(int i){
         mapa.get(e).add(b);
         //six values we working with, 11,12,13, 21,22
     }
+    return mapa;
 }
 
 private BelferElevator chooseOneElevatorAmongMany(ArrayList<BelferElevator> lista, int floorCalled){
@@ -124,6 +126,9 @@ private boolean stop(){
     return false;
 }
 
+public List<BelferElevator> getThree_Elevators(){
+    return Three_Elevators;
+}
 
 
 }
