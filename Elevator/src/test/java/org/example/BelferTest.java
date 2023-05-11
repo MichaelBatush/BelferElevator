@@ -43,13 +43,6 @@ Belfer Belfer = new Belfer();
 
     }
 
-    @Test
-    void createStatusForElevators() {
-
-    }
-
-
-
 
 }
 

@@ -45,16 +45,35 @@ class BelferElevator {
 
     }
 
-    public void move(int floorToGetTo) {
-        if (floorToGetTo > currentFloor){
-            state = ElevatorState.MOVING_UP;
-            while (!calledUp.isEmpty()){
-                DoublyLinkList.ListNode node = myList.head;
-                if (calledUp.contains(node.next)){
-                    stop();
+        public void move(int floorToGetTo) {
+            if (floorToGetTo > currentFloor) {
+                state = ElevatorState.MOVING_UP;
+                while (!calledUp.isEmpty()) {
+                    DoublyLinkList.ListNode node = myList.head;
+                    if (calledUp.contains(node.next)) {
+                        stop();
+                        state = ElevatorState.MOVING_UP;
+                    }
+                    currentFloor++;
+                    move(floorToGetTo);
                 }
+
+            } else if (floorToGetTo < currentFloor) {
+                state = ElevatorState.MOVING_DOWN;
+                while (!calledUp.isEmpty()) {
+                    DoublyLinkList.ListNode node = myList.head;
+                    if (calledDown.contains(node.prev)) {
+                        stop ();
+                        state = ElevatorState.MOVING_DOWN;
+                    }
+                    currentFloor--;
+                    move(floorToGetTo);
+                }
+
+            }else{
+                stop();
+                return;
             }
-        }
     }
 
     public void setStatus(int i){
@@ -85,7 +104,7 @@ class BelferElevator {
     }
 
     public void setCalledDownFloor(int floor){
-        this.calledUp.add(floor);
+        this.calledDown.add(floor);
     }
 
     public boolean isHighFloorPressed(int floor){
@@ -109,6 +128,14 @@ class BelferElevator {
 
     public int getStatus_helper(){
        return this.status_helper;
+    }
+
+    public Set getCalledUpperFloors(){
+        return this.calledUp;
+    }
+
+    public Set getCalledDownFloors(){
+        return this.calledDown;
     }
 
     // endregion
