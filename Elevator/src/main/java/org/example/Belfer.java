@@ -62,7 +62,7 @@ public BelferElevator getClosestElevator(int i, boolean direction){
                 return mapa.get(o).get(0);
             } else if (mapa.get(o).size() > 1){
                 BelferElevator b = chooseOneElevatorAmongMany(mapa.get(o), i);
-                b.move();
+                b.move(i);
             }
         }
     } else {

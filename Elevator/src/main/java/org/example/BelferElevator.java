@@ -47,29 +47,8 @@ class BelferElevator {
 
     }
 
-    public void move() {
-        if (state == ElevatorState.NOT_MOVING && !floorRequests.isEmpty()) {
-            int nextFloor = floorRequests.peek();
-            if (nextFloor > currentFloor) {
-                state = ElevatorState.MOVING_UP;
-                while (currentFloor < nextFloor) {
-                    currentFloor++;
-                    // Send signal to elevator to move up one floor
-                }
-            } else if (nextFloor < currentFloor) {
-                state = ElevatorState.MOVING_DOWN;
-                while (currentFloor > nextFloor) {
-                    currentFloor--;
-                    // Send signal to elevator to move down one floor
-                }
-            }
-            state = ElevatorState.DOORS_OPEN;
-            // Send signal to elevator to open doors
-            // Wait for a few seconds
-            // Send signal to elevator to close doors
-            state = ElevatorState.NOT_MOVING;
-            floorRequests.poll();
-        }
+    public void move(int floorToGetTo) {
+
     }
 
     public boolean isEmpty() {
@@ -218,3 +197,28 @@ class BelferElevator {
     }
 
 }
+
+     /*   if (state == ElevatorState.NOT_MOVING && !floorRequests.isEmpty()) {
+            int nextFloor = floorRequests.peek();
+            if (nextFloor > currentFloor) {
+                state = ElevatorState.MOVING_UP;
+                while (currentFloor < nextFloor) {
+                    currentFloor++;
+                    // Send signal to elevator to move up one floor
+                }
+            } else if (nextFloor < currentFloor) {
+                state = ElevatorState.MOVING_DOWN;
+                while (currentFloor > nextFloor) {
+                    currentFloor--;
+                    // Send signal to elevator to move down one floor
+                }
+            }
+            state = ElevatorState.DOORS_OPEN;
+            // Send signal to elevator to open doors
+            // Wait for a few seconds
+            // Send signal to elevator to close doors
+            state = ElevatorState.NOT_MOVING;
+            floorRequests.poll();
+        }
+
+      */
