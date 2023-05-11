@@ -129,6 +129,17 @@ private boolean stop(){
 public List<BelferElevator> getThree_Elevators(){
     return Three_Elevators;
 }
+    public BelferElevator getSpecificElevator(int i){
+        if (i == 1){
+            return e1;
+        } else if ( i == 2){
+            return e2;
+        } else if (i == 3){
+            return e3;
+        } else {
+            throw new IllegalArgumentException("There is no such thing as this elevator, you silly");
+        }
+    }
 
 
 }
