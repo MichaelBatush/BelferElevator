@@ -48,12 +48,30 @@ class BelferElevator {
     public void move(int floorToGetTo) {
         if (floorToGetTo > currentFloor){
             state = ElevatorState.MOVING_UP;
-            while (floorToGetTo != currentFloor){
-
+            while (!calledUp.isEmpty()){
+                DoublyLinkList.ListNode node = myList.head;
+                if (calledUp.contains(node.next)){
+                    stop();
+                }
             }
         }
     }
 
+    public void setStatus(int i){
+        if (i > 0){
+            this.state = ElevatorState.MOVING_UP;
+        } else if (i < 0){
+            this.state = ElevatorState.MOVING_DOWN;
+        } else {
+            this.state = ElevatorState.NOT_MOVING;
+        }
+    }
+
+    // region TINY METHODS
+
+    public String stop(){
+        return "you may be questioning why its returning a string, and thats a good question";
+    }
     public boolean isEmpty() {
         return (current_weight == 0);
     }
@@ -70,16 +88,6 @@ class BelferElevator {
         this.calledUp.add(floor);
     }
 
-    public void setStatus(int i){
-        if (i > 0){
-            this.state = ElevatorState.MOVING_UP;
-        } else if (i < 0){
-            this.state = ElevatorState.MOVING_DOWN;
-        } else {
-            this.state = ElevatorState.NOT_MOVING;
-        }
-    }
-
     public boolean isHighFloorPressed(int floor){
         return calledUp.contains(floor);
     }
@@ -90,6 +98,21 @@ class BelferElevator {
     public int goUp(){
         return 0;
     }
+
+    public ElevatorState getStatus(){
+        return this.state;
+    }
+
+    public void setStatus_helper(int i){
+        this.status_helper = i;
+    }
+
+    public int getStatus_helper(){
+       return this.status_helper;
+    }
+
+    // endregion
+
 
     public class DoublyLinkList {
         private ListNode head;
@@ -187,41 +210,4 @@ class BelferElevator {
         }
     }
 
-    public ElevatorState getStatus(){
-        return this.state;
-    }
-
-    public void setStatus_helper(int i){
-        this.status_helper = i;
-    }
-
-    public int getStatus_helper(){
-       return this.status_helper;
-    }
-
 }
-
-     /*   if (state == ElevatorState.NOT_MOVING && !floorRequests.isEmpty()) {
-            int nextFloor = floorRequests.peek();
-            if (nextFloor > currentFloor) {
-                state = ElevatorState.MOVING_UP;
-                while (currentFloor < nextFloor) {
-                    currentFloor++;
-                    // Send signal to elevator to move up one floor
-                }
-            } else if (nextFloor < currentFloor) {
-                state = ElevatorState.MOVING_DOWN;
-                while (currentFloor > nextFloor) {
-                    currentFloor--;
-                    // Send signal to elevator to move down one floor
-                }
-            }
-            state = ElevatorState.DOORS_OPEN;
-            // Send signal to elevator to open doors
-            // Wait for a few seconds
-            // Send signal to elevator to close doors
-            state = ElevatorState.NOT_MOVING;
-            floorRequests.poll();
-        }
-
-      */
